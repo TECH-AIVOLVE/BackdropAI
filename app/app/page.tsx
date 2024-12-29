@@ -9,6 +9,7 @@ import { PlusIcon, ReloadIcon } from '@radix-ui/react-icons';
 import TextCustomizer from '@/components/editor/text-customizer';
 import Image from 'next/image';
 import { Accordion } from '@/components/ui/accordion';
+import Footer from '@/components/footer';
 import '@/app/fonts.css'
 
 const Page = () => {
@@ -49,12 +50,12 @@ const Page = () => {
         const newId = Math.max(...textSets.map(set => set.id), 0) + 1;
         setTextSets(prev => [...prev, {
             id: newId,
-            text: 'edit',
+            text: 'Text Here',
             fontFamily: 'Inter',
             top: 0,
             left: 0,
-            color: 'white',
-            fontSize: 200,
+            color: 'black',
+            fontSize: 80,
             fontWeight: 800,
             opacity: 1,
             shadowColor: 'rgba(0, 0, 0, 0.8)',
@@ -64,7 +65,7 @@ const Page = () => {
     };
 
     const handleAttributeChange = (id: number, attribute: string, value: any) => {
-        setTextSets(prev => prev.map(set => 
+        setTextSets(prev => prev.map(set =>
             set.id === id ? { ...set, [attribute]: value } : set
         ));
     };
@@ -80,19 +81,19 @@ const Page = () => {
 
     const saveCompositeImage = () => {
         if (!canvasRef.current || !isImageSetupDone) return;
-    
+
         const canvas = canvasRef.current;
         const ctx = canvas.getContext('2d');
         if (!ctx) return;
-    
+
         const bgImg = new (window as any).Image();
         bgImg.crossOrigin = "anonymous";
         bgImg.onload = () => {
             canvas.width = bgImg.width;
             canvas.height = bgImg.height;
-    
+
             ctx.drawImage(bgImg, 0, 0, canvas.width, canvas.height);
-    
+
             textSets.forEach(textSet => {
                 ctx.save(); // Save the current state
                 ctx.font = `${textSet.fontWeight} ${textSet.fontSize * 3}px ${textSet.fontFamily}`;
@@ -100,17 +101,17 @@ const Page = () => {
                 ctx.globalAlpha = textSet.opacity;
                 ctx.textAlign = 'center';
                 ctx.textBaseline = 'middle';
-    
+
                 const x = canvas.width * (textSet.left + 50) / 100;
                 const y = canvas.height * (50 - textSet.top) / 100;
-    
+
                 // Move the context to the text position and rotate
                 ctx.translate(x, y);
                 ctx.rotate((textSet.rotation * Math.PI) / 180); // Convert degrees to radians
                 ctx.fillText(textSet.text, 0, 0); // Draw text at the origin (0, 0)
                 ctx.restore(); // Restore the original state
             });
-    
+
             if (removedBgImageUrl) {
                 const removedBgImg = new (window as any).Image();
                 removedBgImg.crossOrigin = "anonymous";
@@ -124,7 +125,7 @@ const Page = () => {
             }
         };
         bgImg.src = selectedImage || '';
-    
+
         function triggerDownload() {
             const dataUrl = canvas.toDataURL('image/png');
             const link = document.createElement('a');
@@ -136,9 +137,10 @@ const Page = () => {
 
     return (
         <div className='flex flex-col min-h-screen'>
-            <div className='flex flex-row items-center justify-between p-5 px-10'>
-                <h2 className="text-2xl font-semibold tracking-tight">
-                    AIVOlVE Editor
+            <div className='flex flex-row items-center justify-between p-5 px-10 bg-black'>
+                <h2 className="text-2xl font-semibold tracking-tight text-white flex items-center gap-4">
+                <img src="Logo.ico" alt="BACKDROP AI Logo" className="h-12" />
+                    BACKDROP AI Editor
                 </h2>
                 <div className='flex gap-4'>
                     <input
@@ -148,9 +150,13 @@ const Page = () => {
                         onChange={handleFileChange}
                         accept=".jpg, .jpeg, .png" // Updated to accept only jpg and png
                     />
-                    <Button onClick={handleUploadImage}>
+                    <Button
+                        onClick={handleUploadImage}
+                        className="bg-white text-black border border-black hover:bg-black hover:text-white"
+                    >
                         Upload image
                     </Button>
+
                     {/* You can replace this with a placeholder Avatar or remove it entirely */}
                     <Avatar>
                         <AvatarImage src="/default-avatar.png" alt="Default Avatar" />
@@ -159,15 +165,15 @@ const Page = () => {
             </div>
             <Separator />
             {selectedImage ? (
-                <div className='flex flex-row items-start justify-start gap-10 w-full h-screen p-10'>
+                <div className='flex flex-row items-start justify-center gap-10 w-full h-auto mt-10'>
                     <div className="min-h-[400px] w-[80%] p-4 border border-border rounded-lg relative overflow-hidden">
                         {isImageSetupDone ? (
                             <Image
-                                src={selectedImage} 
+                                src={selectedImage}
                                 alt="Uploaded"
                                 layout="fill"
-                                objectFit="contain" 
-                                objectPosition="center" 
+                                objectFit="contain"
+                                objectPosition="center"
                             />
                         ) : (
                             <span className='flex items-center w-full gap-2'><ReloadIcon className='animate-spin' /> Loading, please wait</span>
@@ -196,17 +202,17 @@ const Page = () => {
                                 src={removedBgImageUrl}
                                 alt="Removed bg"
                                 layout="fill"
-                                objectFit="contain" 
-                                objectPosition="center" 
+                                objectFit="contain"
+                                objectPosition="center"
                                 className="absolute top-0 left-0 w-full h-full"
-                            /> 
+                            />
                         )}
                     </div>
-                    <div className='flex flex-col w-full'>
-                        <Button variant={'secondary'} onClick={addNewTextSet}><PlusIcon className='mr-2'/> Add New Text Set</Button>
+                    <div className='flex flex-col w-full mr-10'>
+                        <Button variant={'secondary'} onClick={addNewTextSet}><PlusIcon className='mr-2' /> Add New Text Set</Button>
                         <Accordion type="single" collapsible className="w-full mt-2">
                             {textSets.map(textSet => (
-                                <TextCustomizer 
+                                <TextCustomizer
                                     key={textSet.id}
                                     textSet={textSet}
                                     handleAttributeChange={handleAttributeChange}
@@ -215,7 +221,7 @@ const Page = () => {
                                 />
                             ))}
                         </Accordion>
-                        
+
                         <canvas ref={canvasRef} style={{ display: 'none' }} />
                         <Button onClick={saveCompositeImage}>
                             Save image
@@ -227,6 +233,9 @@ const Page = () => {
                     <h2 className="text-xl font-semibold">Welcome! Snap, upload, and let the adventure begin!</h2>
                 </div>
             )}
+<br />
+            {/* Use the Footer Component */}
+            <Footer />
         </div>
     );
 }

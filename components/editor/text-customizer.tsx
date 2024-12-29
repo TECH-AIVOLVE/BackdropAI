@@ -109,8 +109,8 @@ const TextCustomizer: React.FC<TextCustomizerProps> = ({ textSet, handleAttribut
                     handleAttributeChange={(attribute, value) => handleAttributeChange(textSet.id, attribute, value)}
                 />
                 <div className="flex flex-row gap-2 my-8">
-                    <Button onClick={() => duplicateTextSet(textSet)}>Duplicate Text Set</Button>
-                    <Button onClick={() => removeTextSet(textSet.id)} variant="destructive">Remove Text Set</Button>
+                    <Button onClick={() => duplicateTextSet(textSet)}>Duplicate</Button>
+                    <Button onClick={() => removeTextSet(textSet.id)} variant="destructive">Remove</Button>
                 </div>
             </AccordionContent>
         </AccordionItem>
