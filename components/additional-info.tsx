@@ -9,7 +9,7 @@ export function AdditionalInfo() {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 max-w-7xl mx-auto w-full">
       <WobbleCard
-        containerClassName="col-span-1 lg:col-span-2 h-full bg-blue-800 min-h-[500px] lg:min-h-[300px]"
+        containerClassName="col-span-1 lg:col-span-2 h-full bg-blue-800 min-h-[200px] lg:min-h-[200px]"
         className="" 
       >
         <Link href={''} target="_blank" rel="noopener noreferrer">
@@ -22,14 +22,11 @@ export function AdditionalInfo() {
             </div>
         </Link>
       </WobbleCard>
-      <Link href={'https://x.com'} target="_blank" rel="noopener noreferrer">
-        <WobbleCard containerClassName="col-span-1 min-h-[300px]">
+      <Link href={'https://pin.it/1MvALmjh9'} target="_blank" rel="noopener noreferrer">
+        <WobbleCard containerClassName="col-span-1 min-h-[200px]">
                 <h2 className="max-w-80  text-left text-balance text-base md:text-xl lg:text-3xl font-semibold tracking-[-0.015em] text-white">
-                    Share your designs
+                    Share your designs on Pinterest
                 </h2>
-                <p className="mt-4 max-w-[26rem] text-left  text-base/6 text-neutral-200">
-                    Created a sick text behind image design? Share it! Click on this box.
-                </p>
         </WobbleCard>
       </Link>
     </div>
