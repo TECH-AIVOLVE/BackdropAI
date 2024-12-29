@@ -19,8 +19,8 @@ const page = () => {
                     <h1 className="text-2xl font-bold">BACKDROP AI</h1>
                 </div>
                 <nav>
-                    <Link href={'/'} className="text-white hover:text-gray-400 mx-3">Home</Link>
-                    <Link href={'/about'} className="text-white hover:text-gray-400 mx-3">About</Link>
+                <Link href={'https://website-lyart-eta-95.vercel.app/'} className="text-white hover:text-gray-400 mx-3">Home</Link>
+                    <Link href={'https://website-lyart-eta-95.vercel.app/about'} className="text-white hover:text-gray-400 mx-3">About</Link>
                     <Link href={'/contact'} className="text-white hover:text-gray-400 mx-3">Contact</Link>
                 </nav>
             </header>
