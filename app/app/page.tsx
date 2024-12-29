@@ -138,7 +138,7 @@ const Page = () => {
         <div className='flex flex-col min-h-screen'>
             <div className='flex flex-row items-center justify-between p-5 px-10'>
                 <h2 className="text-2xl font-semibold tracking-tight">
-                    Backdrop Editor
+                    AIVOlVE Editor
                 </h2>
                 <div className='flex gap-4'>
                     <input
@@ -224,7 +224,7 @@ const Page = () => {
                 </div>
             ) : (
                 <div className='flex items-center justify-center min-h-screen w-full'>
-                    <h2 className="text-xl font-semibold">Welcome, get started by uploading an image!</h2>
+                    <h2 className="text-xl font-semibold">Welcome! Snap, upload, and let the adventure begin!</h2>
                 </div>
             )}
         </div>
