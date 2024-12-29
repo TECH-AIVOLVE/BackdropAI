@@ -52,7 +52,7 @@ const page = () => {
             </HeroHighlight>
 
             <Link href={'/app'} className='mb-10'>
-                <HoverBorderGradient containerClassName="relative rounded-full px-3 py-1 text-sm leading-6 text-muted-foreground ring-1 ring-gray-900/50 hover:ring-gray-900/5 bg-white/300 backdrop-blur-md shadow-lg overflow-hidden">
+                <HoverBorderGradient containerClassName="px-8 py-1">
                     Get Started
                 </HoverBorderGradient>
             </Link>

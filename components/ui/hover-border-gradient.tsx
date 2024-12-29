@@ -80,10 +80,13 @@ export function HoverBorderGradient({
           "flex-none inset-0 overflow-hidden absolute z-0 rounded-[inherit]"
         )}
         style={{
-          filter: "blur(2px)",
+          filter: "blur(2px) brightness(45) drop-shadow(40px 40px 40px rgb(253, 253, 253)",
           position: "absolute",
           width: "100%",
           height: "100%",
+          background: "linear-gradient(145deg, rgb(255, 255, 255), rgb(255, 255, 255))",
+          opacity: "1", 
+          mixBlendMode: "screen"  
         }}
         initial={{ background: movingMap[direction] }}
         animate={{
