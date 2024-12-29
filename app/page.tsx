@@ -13,7 +13,7 @@ import { TypeAnimation } from "react-type-animation";
 const page = () => {
     return (
         <div className="relative isolate pt-14 flex flex-col min-h-screen items-center w-full mt-20 bg-black">
-            <header className="w-full py-4 flex items-center justify-between px-10 bg-black/100 text-white fixed top-0 left-0 z-10 backdrop-blur-lg">
+            <header className="w-full py-4 flex items-center justify-between px-10 bg-black/100 text-white fixed top-0 left-0 z-[999] backdrop-blur-lg">
                 <div className="flex items-center space-x-4">
                     <img src="Logo.ico" alt="BACKDROP AI Logo" className="h-12" />
                     <h1 className="text-2xl font-bold">BACKDROP AI</h1>
@@ -41,10 +41,10 @@ const page = () => {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: [80, -5, 0] }}
                     transition={{ duration: 0.5, ease: [0.4, 0.0, 0.2, 1] }}
-                    className="text-6xl lg:text-5xl lg:leading-tight max-w-5xl mx-auto text-center tracking-tight font-bold text-black dark:text-black"
+                    className="text-6xl lg:text-5xl lg:leading-tight max-w-5xl mx-auto text-center tracking-tight font-bold text-black dark:text-black relative z-50"
                 >
                     <span className="text-white">Create</span>{" "}
-                    <Highlight className='text-white'>
+                    <Highlight className="text-white relative">
                         AI Powered
                     </Highlight>
                     {" "} <span className="text-white">Images</span>
@@ -63,10 +63,10 @@ const page = () => {
             </div>
 
             <footer className="w-full bg-black py-6 border-t border-black-500">
-  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <p className="text-center text-white">
-      © {new Date().getFullYear()} <Link href={'https://website-lyart-eta-95.vercel.app/'} target="_blank" rel="noopener noreferrer" className='hover:font-bold text-white-500'>AIVOLVE</Link>. All rights reserved.
-    </p>
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <p className="text-center text-white">
+                        © {new Date().getFullYear()} <Link href={'https://website-lyart-eta-95.vercel.app/'} target="_blank" rel="noopener noreferrer" className='hover:font-bold text-white-500'>AIVOLVE</Link>. All rights reserved.
+                    </p>
                 </div>
             </footer>
         </div>
