@@ -1,12 +1,8 @@
-// app/app/page.tsx
 'use client'
 
 import React, { useRef, useState } from 'react';
-import { useUser } from '@/hooks/useUser';
-import { useSessionContext } from '@supabase/auth-helpers-react';
-import { Avatar, AvatarImage } from "@/components/ui/avatar"
+import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Separator } from '@/components/ui/separator';
-import Authenticate from '@/components/authenticate';
 import { Button } from '@/components/ui/button';
 import { removeBackground } from "@imgly/background-removal";
 import { PlusIcon, ReloadIcon } from '@radix-ui/react-icons';
@@ -16,8 +12,6 @@ import { Accordion } from '@/components/ui/accordion';
 import '@/app/fonts.css'
 
 const Page = () => {
-    const { user } = useUser();
-    const { session } = useSessionContext();
     const [selectedImage, setSelectedImage] = useState<string | null>(null);
     const [isImageSetupDone, setIsImageSetupDone] = useState<boolean>(false);
     const [removedBgImageUrl, setRemovedBgImageUrl] = useState<string | null>(null);
@@ -141,104 +135,99 @@ const Page = () => {
     };
 
     return (
-        <>
-            {user && session && session.user ? (
-                <div className='flex flex-col min-h-screen'>
-                    <div className='flex flex-row items-center justify-between p-5 px-10'>
-                        <h2 className="text-2xl font-semibold tracking-tight">
-                            Text behind image editor
-                        </h2>
-                        <div className='flex gap-4'>
-                            <input
-                                type="file"
-                                ref={fileInputRef}
-                                style={{ display: 'none' }}
-                                onChange={handleFileChange}
-                                accept=".jpg, .jpeg, .png" // Updated to accept only jpg and png
+        <div className='flex flex-col min-h-screen'>
+            <div className='flex flex-row items-center justify-between p-5 px-10'>
+                <h2 className="text-2xl font-semibold tracking-tight">
+                    Text behind image editor
+                </h2>
+                <div className='flex gap-4'>
+                    <input
+                        type="file"
+                        ref={fileInputRef}
+                        style={{ display: 'none' }}
+                        onChange={handleFileChange}
+                        accept=".jpg, .jpeg, .png" // Updated to accept only jpg and png
+                    />
+                    <Button onClick={handleUploadImage}>
+                        Upload image
+                    </Button>
+                    {/* You can replace this with a placeholder Avatar or remove it entirely */}
+                    <Avatar>
+                        <AvatarImage src="/default-avatar.png" alt="Default Avatar" />
+                    </Avatar>
+                </div>
+            </div>
+            <Separator />
+            {selectedImage ? (
+                <div className='flex flex-row items-start justify-start gap-10 w-full h-screen p-10'>
+                    <div className="min-h-[400px] w-[80%] p-4 border border-border rounded-lg relative overflow-hidden">
+                        {isImageSetupDone ? (
+                            <Image
+                                src={selectedImage} 
+                                alt="Uploaded"
+                                layout="fill"
+                                objectFit="contain" 
+                                objectPosition="center" 
                             />
-                            <Button onClick={handleUploadImage}>
-                                Upload image
-                            </Button>
-                            <Avatar>
-                                <AvatarImage src={user?.user_metadata.avatar_url} />
-                            </Avatar>
-                        </div>
+                        ) : (
+                            <span className='flex items-center w-full gap-2'><ReloadIcon className='animate-spin' /> Loading, please wait</span>
+                        )}
+                        {isImageSetupDone && textSets.map(textSet => (
+                            <div
+                                key={textSet.id}
+                                style={{
+                                    position: 'absolute',
+                                    top: `${50 - textSet.top}%`,
+                                    left: `${textSet.left + 50}%`,
+                                    transform: `translate(-50%, -50%) rotate(${textSet.rotation}deg)`,
+                                    color: textSet.color,
+                                    textAlign: 'center',
+                                    fontSize: `${textSet.fontSize}px`,
+                                    fontWeight: textSet.fontWeight,
+                                    fontFamily: textSet.fontFamily,
+                                    opacity: textSet.opacity
+                                }}
+                            >
+                                {textSet.text}
+                            </div>
+                        ))}
+                        {removedBgImageUrl && (
+                            <Image
+                                src={removedBgImageUrl}
+                                alt="Removed bg"
+                                layout="fill"
+                                objectFit="contain" 
+                                objectPosition="center" 
+                                className="absolute top-0 left-0 w-full h-full"
+                            /> 
+                        )}
                     </div>
-                    <Separator />
-                    {selectedImage ? (
-                        <div className='flex flex-row items-start justify-start gap-10 w-full h-screen p-10'>
-                            <div className="min-h-[400px] w-[80%] p-4 border border-border rounded-lg relative overflow-hidden">
-                                {isImageSetupDone ? (
-                                    <Image
-                                        src={selectedImage} 
-                                        alt="Uploaded"
-                                        layout="fill"
-                                        objectFit="contain" 
-                                        objectPosition="center" 
-                                    />
-                                ) : (
-                                    <span className='flex items-center w-full gap-2'><ReloadIcon className='animate-spin' /> Loading, please wait</span>
-                                )}
-                                {isImageSetupDone && textSets.map(textSet => (
-                                    <div
-                                        key={textSet.id}
-                                        style={{
-                                            position: 'absolute',
-                                            top: `${50 - textSet.top}%`,
-                                            left: `${textSet.left + 50}%`,
-                                            transform: `translate(-50%, -50%) rotate(${textSet.rotation}deg)`,
-                                            color: textSet.color,
-                                            textAlign: 'center',
-                                            fontSize: `${textSet.fontSize}px`,
-                                            fontWeight: textSet.fontWeight,
-                                            fontFamily: textSet.fontFamily,
-                                            opacity: textSet.opacity
-                                        }}
-                                    >
-                                        {textSet.text}
-                                    </div>
-                                ))}
-                                {removedBgImageUrl && (
-                                    <Image
-                                        src={removedBgImageUrl}
-                                        alt="Removed bg"
-                                        layout="fill"
-                                        objectFit="contain" 
-                                        objectPosition="center" 
-                                        className="absolute top-0 left-0 w-full h-full"
-                                    /> 
-                                )}
-                            </div>
-                            <div className='flex flex-col w-full'>
-                                <Button variant={'secondary'} onClick={addNewTextSet}><PlusIcon className='mr-2'/> Add New Text Set</Button>
-                                <Accordion type="single" collapsible className="w-full mt-2">
-                                    {textSets.map(textSet => (
-                                        <TextCustomizer 
-                                            key={textSet.id}
-                                            textSet={textSet}
-                                            handleAttributeChange={handleAttributeChange}
-                                            removeTextSet={removeTextSet}
-                                            duplicateTextSet={duplicateTextSet}
-                                        />
-                                    ))}
-                                </Accordion>
-                                
-                                <canvas ref={canvasRef} style={{ display: 'none' }} />
-                                <Button onClick={saveCompositeImage}>
-                                    Save image
-                                </Button>
-                            </div>
-                        </div>
-                    ) : (
-                        <div className='flex items-center justify-center min-h-screen w-full'>
-                            <h2 className="text-xl font-semibold">Welcome, get started by uploading an image!</h2>
-                        </div>
-                    )}
+                    <div className='flex flex-col w-full'>
+                        <Button variant={'secondary'} onClick={addNewTextSet}><PlusIcon className='mr-2'/> Add New Text Set</Button>
+                        <Accordion type="single" collapsible className="w-full mt-2">
+                            {textSets.map(textSet => (
+                                <TextCustomizer 
+                                    key={textSet.id}
+                                    textSet={textSet}
+                                    handleAttributeChange={handleAttributeChange}
+                                    removeTextSet={removeTextSet}
+                                    duplicateTextSet={duplicateTextSet}
+                                />
+                            ))}
+                        </Accordion>
+                        
+                        <canvas ref={canvasRef} style={{ display: 'none' }} />
+                        <Button onClick={saveCompositeImage}>
+                            Save image
+                        </Button>
+                    </div>
                 </div>
             ) : (
-                <Authenticate />
+                <div className='flex items-center justify-center min-h-screen w-full'>
+                    <h2 className="text-xl font-semibold">Welcome, get started by uploading an image!</h2>
+                </div>
             )}
-        </>
+        </div>
     );
 }
 
