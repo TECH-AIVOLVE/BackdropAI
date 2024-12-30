@@ -21,7 +21,10 @@ const page = () => {
                 <nav>
                 <Link href={'https://website-lyart-eta-95.vercel.app/'} className="text-white hover:text-gray-400 mx-3">Home</Link>
                     <Link href={'https://website-lyart-eta-95.vercel.app/about'} className="text-white hover:text-gray-400 mx-3">About</Link>
-                    <Link href={'/contact'} className="text-white hover:text-gray-400 mx-3">Contact</Link>
+                    <Link href="mailto:tech.aivolve@gmail.com" className="text-white hover:text-gray-400 mx-3">
+                       Contact
+                        </Link>
+
                 </nav>
             </header>
 
