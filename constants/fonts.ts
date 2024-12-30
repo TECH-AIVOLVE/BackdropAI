@@ -3,8 +3,9 @@ export const fonts = [
     "Alegreya Sans SC", "Alfa Slab One", "Alice", "Almarai", "Amatic SC", "Amiri", "Antic Slab", "Anton",
     "Architects Daughter", "Archivo", "Archivo Black", "Archivo Narrow", "Arimo", "Arsenal", "Arvo", "Asap",
     "Asap Condensed", "Assistant", "Barlow", "Barlow Condensed", "Barlow Semi Condensed", "Be Vietnam Pro",
-    "Bebas Neue", "Bitter", "Black Ops One", "Bodoni Moda", "Bree Serif", "Bungee", "Cabin", "Cairo", "Cantarell",
-    "Cardo", "Catamaran", "Caveat", "Chakra Petch", "Changa", "Chivo", "Cinzel", "Comfortaa", "Commissioner",
+    "Bebas Neue", "Bitter", "Black Ops One", "Bodoni Moda", "Bree Serif", "Bungee", "Cinzel", 
+    "Cinzel Decorative", "Cabin", "Cairo", "Cantarell",
+    "Cardo", "Catamaran", "Caveat", "Chakra Petch", "Changa", "Chivo", "Comfortaa", "Commissioner",
     "Concert One", "Cookie", "Cormorant", "Cormorant Garamond", "Courgette", "Crete Round", "Crimson Pro",
     "Crimson Text", "Cuprum", "DM Sans", "DM Serif Display", "DM Serif Text", "Dancing Script", "Didact Gothic",
     "Domine", "Dosis", "EB Garamond", "Eczar", "El Messiri", "Electrolize", "Encode Sans", "Encode Sans Condensed",
@@ -34,4 +35,4 @@ export const fonts = [
     "Ubuntu", "Ubuntu Condensed", "Ubuntu Mono", "Unbounded", "Unna", "Urbanist",
     "Varela Round", "Vollkorn", "Work Sans", "Yanone Kaffeesatz", "Yantramanav",
     "Yellowtail", "Yeseva One", "Zen Kaku Gothic New", "Zeyada", "Zilla Slab"
-]
+];
