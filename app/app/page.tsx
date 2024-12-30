@@ -149,7 +149,7 @@ const Page = () => {
                 />
             </div>
 
-            <div className='flex flex-row items-center justify-between p-5 px-10 bg-black z-[999]'>
+            <div className='w-full py-4 flex items-center justify-between px-10 bg-black/100 text-white fixed top-0 left-0 z-[999] backdrop-blur-lg'>
                 <h2 className="text-2xl font-semibold tracking-tight text-white flex items-center gap-4">
                     <img src="Logo.ico" alt="BACKDROP AI Logo" className="h-12" />
                     BACKDROP AI Editor
@@ -176,7 +176,7 @@ const Page = () => {
             </div>
             <Separator />
             {selectedImage ? (
-                <div className='flex flex-row items-start justify-center gap-10 w-full h-auto mt-10 mb-10'>
+                <div className='flex flex-row items-start justify-center gap-10 w-full h-auto mt-36 mb-10'>
                     <div className="min-h-[400px] w-full p-4 border border-border rounded-lg relative overflow-hidden flex items-center justify-center bg-black">
                         {isImageSetupDone ? (
                             <Image
