@@ -136,10 +136,22 @@ const Page = () => {
     };
 
     return (
-        <div className='flex flex-col min-h-screen'>
+        <div className='flex flex-col min-h-screen relative'>
+
+            {/* Background div */}
+            <div className="absolute inset-x-0 -top-40 -z-30 transform-gpu overflow-hidden blur-3xl sm:-top-80">
+                <div
+                    className="relative left-[calc(50%-15rem)] aspect-[1155/678] w-[48rem] -translate-x-1/6 rotate-[40deg] bg-gradient-to-tr from-[#FF4D9E] to-[#A349E5] opacity-77 sm:left-[calc(50%-35rem)] sm:w-[80rem]"
+                    style={{
+                        clipPath:
+                            "polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)",
+                    }}
+                />
+            </div>
+
             <div className='flex flex-row items-center justify-between p-5 px-10 bg-black'>
                 <h2 className="text-2xl font-semibold tracking-tight text-white flex items-center gap-4">
-                <img src="Logo.ico" alt="BACKDROP AI Logo" className="h-12" />
+                    <img src="Logo.ico" alt="BACKDROP AI Logo" className="h-12" />
                     BACKDROP AI Editor
                 </h2>
                 <div className='flex gap-4'>
@@ -148,16 +160,15 @@ const Page = () => {
                         ref={fileInputRef}
                         style={{ display: 'none' }}
                         onChange={handleFileChange}
-                        accept=".jpg, .jpeg, .png" // Updated to accept only jpg and png
+                        accept=".jpg, .jpeg, .png"
                     />
                     <Button
                         onClick={handleUploadImage}
-                        className="bg-white text-black border border-black hover:bg-black hover:text-white"
+                        className="bg-white text-black border border-black hover:bg-black hover:text-white z-[999]"
                     >
                         Upload image
                     </Button>
 
-                    {/* You can replace this with a placeholder Avatar or remove it entirely */}
                     <Avatar>
                         <AvatarImage src="/default-avatar.png" alt="Default Avatar" />
                     </Avatar>
@@ -229,12 +240,11 @@ const Page = () => {
                     </div>
                 </div>
             ) : (
-                <div className='flex items-center justify-center min-h-screen w-full'>
-                    <h2 className="text-xl font-semibold">Welcome! Snap, upload, and let the adventure begin!</h2>
+                <div className='flex items-center justify-center min-h-screen w-full bg-black'>
+                    <h2 className="text-xl font-semibold text-white">Welcome! Snap, upload, and let the adventure begin!</h2>
                 </div>
             )}
-<br />
-            {/* Use the Footer Component */}
+            <br />
             <Footer />
         </div>
     );
