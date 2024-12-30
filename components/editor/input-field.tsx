@@ -24,7 +24,7 @@ const InputField: React.FC<InputFieldProps> = ({
 
   return (
     <>
-      <div className="flex flex-col items-start">
+      <div className="flex flex-col items-start text-black">
         {/* <Label htmlFor={attribute}>{label}</Label> */}
         <Input
           type="text"

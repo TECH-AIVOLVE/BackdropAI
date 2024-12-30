@@ -34,7 +34,7 @@ const TextCustomizer: React.FC<TextCustomizerProps> = ({ textSet, handleAttribut
     return (
         <AccordionItem value={`item-${textSet.id}`}>
             <AccordionTrigger>{textSet.text}</AccordionTrigger>
-            <AccordionContent className='p-1'>
+            <AccordionContent className='p-1 text-white rounded-lg mt-5'>
                 <InputField
                     attribute="text"
                     label="Text"
@@ -46,7 +46,7 @@ const TextCustomizer: React.FC<TextCustomizerProps> = ({ textSet, handleAttribut
                     currentFont={textSet.fontFamily} 
                     handleAttributeChange={(attribute, value) => handleAttributeChange(textSet.id, attribute, value)}
                 /> 
-                <div className='flex flex-row items-start justify-start gap-10 w-full'>
+                <div className='flex flex-row items-start justify-start gap-10 w-full text-white'>
                     <ColorPicker
                         attribute="color" 
                         label="Text Color"

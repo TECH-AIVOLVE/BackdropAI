@@ -136,10 +136,10 @@ const Page = () => {
     };
 
     return (
-        <div className='flex flex-col min-h-screen relative'>
+        <div className='flex flex-col min-h-screen relative bg-black backdrop-blur-lg'>
 
             {/* Background div */}
-            <div className="absolute inset-x-0 -top-40 -z-30 transform-gpu overflow-hidden blur-3xl sm:-top-80">
+            <div className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80">
                 <div
                     className="relative left-[calc(50%-15rem)] aspect-[1155/678] w-[48rem] -translate-x-1/6 rotate-[40deg] bg-gradient-to-tr from-[#FF4D9E] to-[#A349E5] opacity-77 sm:left-[calc(50%-35rem)] sm:w-[80rem]"
                     style={{
@@ -149,7 +149,7 @@ const Page = () => {
                 />
             </div>
 
-            <div className='flex flex-row items-center justify-between p-5 px-10 bg-black'>
+            <div className='flex flex-row items-center justify-between p-5 px-10 bg-black z-[999]'>
                 <h2 className="text-2xl font-semibold tracking-tight text-white flex items-center gap-4">
                     <img src="Logo.ico" alt="BACKDROP AI Logo" className="h-12" />
                     BACKDROP AI Editor
@@ -176,8 +176,8 @@ const Page = () => {
             </div>
             <Separator />
             {selectedImage ? (
-                <div className='flex flex-row items-start justify-center gap-10 w-full h-auto mt-10'>
-                    <div className="min-h-[400px] w-[80%] p-4 border border-border rounded-lg relative overflow-hidden">
+                <div className='flex flex-row items-start justify-center gap-10 w-full h-auto mt-10 mb-10'>
+                    <div className="min-h-[400px] w-full p-4 border border-border rounded-lg relative overflow-hidden flex items-center justify-center bg-black">
                         {isImageSetupDone ? (
                             <Image
                                 src={selectedImage}
@@ -187,7 +187,7 @@ const Page = () => {
                                 objectPosition="center"
                             />
                         ) : (
-                            <span className='flex items-center w-full gap-2'><ReloadIcon className='animate-spin' /> Loading, please wait</span>
+                            <span className='flex items-center justify-center w-full gap-2 text-white w-screen'><ReloadIcon className='animate-spin' /> Loading, please wait</span>
                         )}
                         {isImageSetupDone && textSets.map(textSet => (
                             <div
@@ -240,8 +240,8 @@ const Page = () => {
                     </div>
                 </div>
             ) : (
-                <div className='flex items-center justify-center min-h-screen w-full bg-black'>
-                    <h2 className="text-xl font-semibold text-white">Welcome! Snap, upload, and let the adventure begin!</h2>
+                <div className='flex items-center justify-center min-h-screen w-full bg-black bg-opacity-100 backdrop-blur-lg -z-30'>
+                    <h2 className="text-xl font-semibold text-white mb-20">Welcome! Snap, upload, and let the adventure begin!</h2>
                 </div>
             )}
             <br />
