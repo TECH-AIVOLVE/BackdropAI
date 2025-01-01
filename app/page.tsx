@@ -13,7 +13,7 @@ import { TypeAnimation } from "react-type-animation";
 const page = () => {
     return (
         <div className="relative isolate pt-14 flex flex-col min-h-screen items-center w-full mt-20 bg-black">
-            <header className="w-full py-4 flex items-center justify-between px-10 bg-black/100 text-white fixed top-0 left-0 z-[999] backdrop-blur-lg">
+            <header className="w-full py-4 flex items-center justify-between px-10 bg-black/95 text-white fixed top-0 left-0 z-[999] backdrop-blur-lg border-b border-gray-500">
                 <div className="flex items-center space-x-4">
                     <img src="Logo.ico" alt="BACKDROP AI Logo" className="h-12" />
                     <h1 className="text-2xl font-bold">BACKDROP AI</h1>
