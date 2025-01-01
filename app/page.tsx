@@ -15,7 +15,10 @@ const page = () => {
         <div className="relative isolate pt-14 flex flex-col min-h-screen items-center w-full mt-19 bg-black">
             <header className="w-full py-3 flex items-center justify-between px-10 bg-black/95 text-white fixed top-0 left-0 z-[999] backdrop-blur-lg border-b border-gray-500">
                 <div className="flex items-center space-x-4">
+                <a href="https://backdrop-ai-one.vercel.app/">
+
                     <img src="Logo.ico" alt="BACKDROP AI Logo" className="h-12" />
+                    </a>
                     <h1 className="text-2xl font-bold">BACKDROP AI</h1>
                 </div>
                 <nav>

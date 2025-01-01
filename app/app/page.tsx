@@ -151,7 +151,9 @@ const Page = () => {
 
             <div className='w-full py-4 flex items-center justify-between px-10 bg-black/100 text-white fixed top-0 left-0 z-[999] backdrop-blur-lg'>
                 <h2 className="text-2xl font-semibold tracking-tight text-white flex items-center gap-4">
+                <a href="https://backdrop-ai-one.vercel.app/"> 
                     <img src="Logo.ico" alt="BACKDROP AI Logo" className="h-12" />
+                    </a>
                     BACKDROP AI Editor
                 </h2>
                 <div className='flex gap-4'>
