@@ -2,7 +2,7 @@
 import Image from "next/image";
 import React from "react";
 import { WobbleCard } from "./ui/wobble-card";
-
+//
 import Link from "next/link";
 
 export function AdditionalInfo() {
