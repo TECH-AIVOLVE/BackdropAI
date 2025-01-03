@@ -26,7 +26,7 @@ export const LayoutGrid = ({ cards }: { cards: Card[] }) => {
   };
 
   return (
-    <div className="w-full h-full p-10 grid grid-cols-1 md:grid-cols-3 max-w-7xl mx-auto gap-4 relative">
+    <div className="w-full h-full p-4 sm:p-6 md:p-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 max-w-7xl mx-auto gap-4 relative">
       {cards.map((card, i) => (
         <div key={i} className={cn(card.className, "")}>
           <motion.div
@@ -61,17 +61,22 @@ export const LayoutGrid = ({ cards }: { cards: Card[] }) => {
 
 const ImageComponent = ({ card }: { card: Card }) => {
   return (
-    <motion.img
+    <motion.div
       layoutId={`image-${card.id}-image`}
-      src={typeof card.thumbnail === 'string' ? card.thumbnail : card.thumbnail.src} // Handle both types
-      height="500"
-      width="500"
       className={cn(
-        "object-cover object-top inset-0 h-full w-full transition duration-200",
-        "md:absolute" 
+        "w-full h-full relative",
+        "md:absolute"
       )}
-      alt="thumbnail"
-    />
+    >
+      <Image
+        src={typeof card.thumbnail === 'string' ? card.thumbnail : card.thumbnail.src}
+        layout="fill"
+        objectFit="cover"
+        objectPosition="top"
+        alt="thumbnail"
+        loading="lazy"
+      />
+    </motion.div>
   );
 };
 
@@ -105,7 +110,7 @@ const SelectedCard = ({ selected }: { selected: Card | null }) => {
           duration: 0.3,
           ease: "easeInOut",
         }}
-        className="relative px-8 pb-4 z-[70]"
+        className="relative px-4 sm:px-6 md:px-8 pb-4 z-[70]"
       >
         {selected?.content}
       </motion.div>

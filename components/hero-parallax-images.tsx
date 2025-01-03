@@ -17,5 +17,5 @@ export function HeroParallaxImages() {
 }
 
 const images = [
-  goat, wow, life, legacy, coffee, Lucknow, nature, love, smoke
+  goat, life, legacy, Lucknow,  smoke,love
 ];
