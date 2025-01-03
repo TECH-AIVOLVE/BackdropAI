@@ -75,25 +75,25 @@ const cards = [
   {
     id: 1,
     content: <SkeletonOne />,
-    className: "md:col-span-2",
+    className: "md:col-span-2 rounded-xl border",
     thumbnail: FROM
   },
   {
     id: 2,
     content: <SkeletonTwo />,
-    className: "col-span-1",
+    className: "col-span-1 rounded-xl border",
     thumbnail: RAVEN
   },
   {
     id: 3,
     content: <SkeletonThree />,
-    className: "col-span-1",
+    className: "col-span-1 rounded-xl border",
     thumbnail: KYOTO
   },
   {
     id: 4,
     content: <SkeletonFour />,
-    className: "md:col-span-2",
+    className: "md:col-span-2 rounded-xl border",
     thumbnail: ALONE
   },
 ];
