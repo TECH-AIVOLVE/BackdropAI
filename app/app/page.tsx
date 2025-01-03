@@ -177,32 +177,9 @@ const Page = () => {
 
             {/* Main Content */}
             {selectedImage ? (
-                <div className='flex flex-col gap-4 w-full min-h-screen mt-20 md:mt-24 px-4 md:px-10 pb-20'>
-                    {/* Controls Section */}
-                    <div className='w-full bg-black/20 backdrop-blur-sm p-4 rounded-lg border border-white/10'>
-                        <Button variant={'secondary'} onClick={addNewTextSet} className="w-full mb-4">
-                            <PlusIcon className='mr-2' /> Add New Text Set
-                        </Button>
-                        <Accordion type="single" collapsible className="w-full">
-                            {textSets.map(textSet => (
-                                <TextCustomizer
-                                    key={textSet.id}
-                                    textSet={textSet}
-                                    handleAttributeChange={handleAttributeChange}
-                                    removeTextSet={removeTextSet}
-                                    duplicateTextSet={duplicateTextSet}
-                                />
-                            ))}
-                        </Accordion>
-                        {textSets.length > 0 && (
-                            <Button onClick={saveCompositeImage} className="w-full mt-4">
-                                Save image
-                            </Button>
-                        )}
-                    </div>
-
+                <div className='flex flex-col lg:flex-row items-start justify-center gap-4 lg:gap-10 w-full min-h-screen mt-20 md:mt-24 px-4 md:px-10 pb-20'>
                     {/* Image Preview Section */}
-                    <div className="min-h-[300px] md:min-h-[400px] w-full p-2 md:p-4 border border-border rounded-lg relative overflow-hidden flex items-center justify-center bg-black">
+                    <div className="min-h-[300px] md:min-h-[400px] w-full lg:w-1/2 p-2 md:p-4 border border-border rounded-lg relative overflow-hidden flex items-center justify-center bg-black">
                         {isImageSetupDone ? (
                             <Image
                                 src={selectedImage}
@@ -244,6 +221,29 @@ const Page = () => {
                                 objectPosition="center"
                                 className="absolute top-0 left-0 w-full h-full"
                             />
+                        )}
+                    </div>
+
+                    {/* Controls Section */}
+                    <div className='w-full lg:w-1/2 bg-black/20 backdrop-blur-sm p-4 rounded-lg border border-white/10'>
+                        <Button variant={'secondary'} onClick={addNewTextSet} className="w-full mb-4">
+                            <PlusIcon className='mr-2' /> Add New Text Set
+                        </Button>
+                        <Accordion type="single" collapsible className="w-full">
+                            {textSets.map(textSet => (
+                                <TextCustomizer
+                                    key={textSet.id}
+                                    textSet={textSet}
+                                    handleAttributeChange={handleAttributeChange}
+                                    removeTextSet={removeTextSet}
+                                    duplicateTextSet={duplicateTextSet}
+                                />
+                            ))}
+                        </Accordion>
+                        {textSets.length > 0 && (
+                            <Button onClick={saveCompositeImage} className="w-full mt-4">
+                                Save image
+                            </Button>
                         )}
                     </div>
                     <canvas ref={canvasRef} style={{ display: 'none' }} />
