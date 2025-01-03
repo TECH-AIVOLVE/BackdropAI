@@ -2,7 +2,7 @@ import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Accordion } from '@/components/ui/accordion';
 import { PlusIcon } from '@radix-ui/react-icons';
-import TextCustomizer from './text-customizer';
+import TextCustomizer from '@/components/editor/text-customizer';
 import { TextSet } from '@/types';
 
 interface EditorPanelProps {
