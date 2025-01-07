@@ -26,7 +26,6 @@ export const fonts = [
     "Permanent Marker", "Philosopher", "Play", "Playfair Display", "Plus Jakarta Sans", "Poppins", "Prata", "Prompt",
     "Public Sans", "Quattrocento", "Quattrocento Sans", "Questrial", "Quicksand", "Rajdhani", "Raleway", "Readex Pro", "Red Hat Display", "Righteous",
     "Roboto", "Roboto Condensed", "Roboto Flex", "Roboto Mono", "Roboto Serif", "Roboto Slab",
-    "Rokkitt", "Rowdies", "Rubik", "Rubik Bubbles", "Rubik Mono One", "Russo One",
     "Sacramento", "Saira", "Saira Condensed", "Sarabun", "Satisfy", "Sawarabi Gothic",
     "Sawarabi Mincho", "Sen", "Shadows Into Light", "Signika", "Signika Negative",
     "Silkscreen", "Six Caps", "Slabo 27px", "Sora", "Source Code Pro", "Source Sans 3",
