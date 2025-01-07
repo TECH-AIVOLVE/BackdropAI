@@ -1,7 +1,4 @@
 import React from 'react';
-import Image from 'next/image';
-import { ReloadIcon } from '@radix-ui/react-icons';
-import { TextOverlay } from './TextOverlay';
 import { TextSet } from '@/types';
 
 interface ImageEditorProps {
@@ -15,39 +12,61 @@ export const ImageEditor: React.FC<ImageEditorProps> = ({
     selectedImage,
     isProcessing,
     textSets,
-    removedBgImageUrl
+    removedBgImageUrl,
 }) => {
     return (
-        <div className="min-h-[300px] md:min-h-[400px] w-full lg:w-1/2 p-2 md:p-4 border border-border rounded-lg relative overflow-hidden flex items-center justify-center bg-black">
-            {isProcessing ? (
-                <span className='flex items-center justify-center gap-2 text-white'>
-                    <ReloadIcon className='animate-spin' /> Processing image...
-                </span>
-            ) : (
-                <>
-                    <Image
-                        src={selectedImage}
-                        alt="Uploaded"
-                        layout="fill"
-                        objectFit="contain"
-                        objectPosition="center"
-                        priority
+        <div className="relative w-full lg:w-2/3 h-[600px] preview-container">
+            <div className="relative w-full h-full preview-image">
+                {/* Base Image */}
+                <img
+                    src={selectedImage}
+                    alt="Selected"
+                    className="w-full h-full object-contain"
+                />
+                
+                {/* Text Overlay */}
+                {textSets.map((textSet) => (
+                    <div
+                        key={textSet.id}
+                        className="absolute transform -translate-x-1/2 -translate-y-1/2"
+                        style={{
+                            top: `${50 - textSet.top}%`,
+                            left: `${textSet.left + 50}%`,
+                            transform: `translate(-50%, -50%) rotate(${textSet.rotation}deg)`,
+                        }}
+                    >
+                        <div
+                            style={{
+                                fontFamily: textSet.fontFamily,
+                                fontSize: `${textSet.fontSize}px`,
+                                fontWeight: textSet.fontWeight,
+                                color: textSet.color,
+                                opacity: textSet.opacity,
+                                textShadow: textSet.shadowSize > 0
+                                    ? `${textSet.shadowSize}px ${textSet.shadowSize}px ${textSet.shadowSize}px ${textSet.shadowColor}`
+                                    : 'none',
+                            }}
+                        >
+                            {textSet.text}
+                        </div>
+                    </div>
+                ))}
+
+                {/* Background-Removed Image Overlay */}
+                {removedBgImageUrl && (
+                    <img
+                        src={removedBgImageUrl}
+                        alt="No Background"
+                        className="absolute top-0 left-0 w-full h-full object-contain z-10"
                     />
-                    {textSets.map(textSet => (
-                        <TextOverlay key={textSet.id} textSet={textSet} />
-                    ))}
-                    {removedBgImageUrl && (
-                        <Image
-                            src={removedBgImageUrl}
-                            alt="Removed background"
-                            layout="fill"
-                            objectFit="contain"
-                            objectPosition="center"
-                            className="absolute top-0 left-0 w-full h-full"
-                            priority
-                        />
-                    )}
-                </>
+                )}
+            </div>
+
+            {/* Processing Indicator */}
+            {isProcessing && (
+                <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+                    <div className="text-white">Processing...</div>
+                </div>
             )}
         </div>
     );

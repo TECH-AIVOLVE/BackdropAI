@@ -94,51 +94,64 @@ const Page = () => {
 
     const saveCompositeImage = useCallback(async () => {
         if (!canvasRef.current || !selectedImage) return;
-
+    
         const canvas = canvasRef.current;
         const ctx = canvas.getContext('2d');
         if (!ctx) return;
-
+    
         try {
+            const previewContainer = document.querySelector('.preview-container');
+            const previewWidth = previewContainer?.clientWidth || 1; // Avoid division by 0
+            const previewHeight = previewContainer?.clientHeight || 1;
+    
             const [bgImg, removedBgImg] = await Promise.all([
                 loadAndCacheImage(selectedImage, imageCache.current),
                 removedBgImageUrl
                     ? loadAndCacheImage(removedBgImageUrl, imageCache.current)
                     : Promise.resolve(null),
             ]);
-
+    
+            // Set canvas size to match the image's native resolution
             canvas.width = bgImg.width;
             canvas.height = bgImg.height;
-
+    
+            // Calculate scaling factors
+            const scaleX = canvas.width / previewWidth;
+            const scaleY = canvas.height / previewHeight;
+    
+            // Draw Base Image
             ctx.drawImage(bgImg, 0, 0, canvas.width, canvas.height);
-
+    
+            // Draw Text Sets with scaling
             textSets.forEach((textSet) => {
                 ctx.save();
-                ctx.font = `${textSet.fontWeight} ${textSet.fontSize * 3}px ${textSet.fontFamily}`;
+                ctx.font = `${textSet.fontWeight} ${textSet.fontSize * scaleX}px ${textSet.fontFamily}`;
                 ctx.fillStyle = textSet.color;
                 ctx.globalAlpha = textSet.opacity;
                 ctx.textAlign = 'center';
                 ctx.textBaseline = 'middle';
-
+    
                 const x = canvas.width * (textSet.left + 50) / 100;
                 const y = canvas.height * (50 - textSet.top) / 100;
-
+    
                 ctx.translate(x, y);
                 ctx.rotate((textSet.rotation * Math.PI) / 180);
-
+    
                 if (textSet.shadowSize > 0) {
                     ctx.shadowColor = textSet.shadowColor;
-                    ctx.shadowBlur = textSet.shadowSize;
+                    ctx.shadowBlur = textSet.shadowSize * scaleX; // Scale shadow size
                 }
-
+    
                 ctx.fillText(textSet.text, 0, 0);
                 ctx.restore();
             });
-
+    
+            // Draw Background-Removed Image (if exists)
             if (removedBgImg) {
                 ctx.drawImage(removedBgImg, 0, 0, canvas.width, canvas.height);
             }
-
+    
+            // Export Image
             const dataUrl = canvas.toDataURL('image/png');
             const link = document.createElement('a');
             link.download = 'text-behind-image.png';
@@ -148,6 +161,7 @@ const Page = () => {
             console.error('Error saving image:', error);
         }
     }, [selectedImage, removedBgImageUrl, textSets]);
+    
 
     return (
         <div className="flex flex-col min-h-screen relative bg-black backdrop-blur-lg">
